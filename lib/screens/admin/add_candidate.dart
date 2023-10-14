@@ -24,10 +24,10 @@ class _AddCandidateState extends State<AddCandidate> {
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
-          title: Text('ADD VOTE OPTIONS',
+          title: Text('Add Vote Options',
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.yanoneKaffeesatz(
-                  fontSize: 30.0,
+              style: GoogleFonts.roboto(
+                  fontSize: 18.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold)),
         ),
@@ -35,24 +35,15 @@ class _AddCandidateState extends State<AddCandidate> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 5.0),
-                child: Center(
-                  child: Image(
-                    height: 80.0,
-                    image: AssetImage('assets/icons/logo.png'),
-                  ),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0, bottom: 10),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Text(
-                      'VOTE ${Get.arguments[1].name.toString().toUpperCase()}',
+                      'Election Name :${Get.arguments[1].name.toString().toUpperCase()}',
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.yanoneKaffeesatz(
-                          fontSize: 30.0,
+                      style: GoogleFonts.roboto(
+                          fontSize: 18.0,
                           color: Colors.green,
                           fontWeight: FontWeight.bold)),
                 ),
@@ -81,7 +72,7 @@ class _AddCandidateState extends State<AddCandidate> {
                     ? const SliverToBoxAdapter(
                         child: Column(children: [
                           Icon(
-                            Icons.wifi_off,
+                            Icons.person,
                             size: 100.0,
                           ),
                           Text('NO CANDIDATE ADDED YET',
@@ -120,13 +111,12 @@ class _AddCandidateState extends State<AddCandidate> {
         ),
         SliverToBoxAdapter(
             child: Padding(
-          padding: const EdgeInsets.only(
-              left: 45.0, right: 75.0, top: 40.0, bottom: 20.0),
+          padding: const EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
           child: Container(
             height: 50.0,
             alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-                color: Colors.green, borderRadius: BorderRadius.circular(10.0)),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
             child: ElevatedButton.icon(
                 onPressed: () {
                   Get.to(const VoteDashboard(),

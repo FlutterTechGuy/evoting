@@ -131,30 +131,20 @@ class _AddVoteOptionWidgetState extends State<AddVoteOptionWidget> {
     Get.put(ElectionController());
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Add Option Or Candidate",
+          style: TextStyle(
+              fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
       backgroundColor: Colors.green[100],
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 50.0),
-              child: Center(
-                child: Image(
-                  image: AssetImage('assets/icons/logo.png'),
-                  height: 80.0,
-                  width: 300.0,
-                ),
-              ),
-            ),
             const SizedBox(
               height: 10.0,
-            ),
-            const Text(
-              "ADD OPTION OR CANDIDATE",
-              style: TextStyle(
-                  fontSize: 28.0,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold),
             ),
             const Divider(),
             InkWell(
@@ -265,7 +255,7 @@ class _AddVoteOptionWidgetState extends State<AddVoteOptionWidget> {
         },
         child: const Icon(
           Icons.check_circle,
-          color: Colors.green,
+          color: Colors.white,
         ),
       ),
     );

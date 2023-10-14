@@ -22,23 +22,15 @@ class NewVote extends StatelessWidget {
   Widget build(BuildContext context) {
     _electionController = Get.put(ElectionController());
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create new Election'),
+      ),
       backgroundColor: Colors.green[100],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 28.0),
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(
-                child: Center(
-                  child: Text(
-                    'CREATE NEW ELECTION',
-                    style: GoogleFonts.yanoneKaffeesatz(
-                        fontSize: 28.0,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -106,15 +98,10 @@ class NewVote extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.green[400],
                       borderRadius: BorderRadius.circular(18.0)),
-                  child: ElevatedButton.icon(
-                    label: const Text(
+                  child: TextButton(
+                    child: const Text(
                       'Continue',
                       style: TextStyle(fontSize: 22.0, color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.next_plan,
-                      size: 32.0,
-                      color: Colors.white,
                     ),
                     onPressed: () async {
                       context.read<ElectionController>().createElection(

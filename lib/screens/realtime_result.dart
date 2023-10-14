@@ -160,7 +160,7 @@ Widget _buildCandidateResult(String image, String title, double count) {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-              fontSize: 22.0,
+              fontSize: 18.0,
               color: Colors.black38,
               fontWeight: FontWeight.bold),
         ),

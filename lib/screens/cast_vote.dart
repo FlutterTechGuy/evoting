@@ -2,6 +2,7 @@ import 'package:e_voting_app/controllers/election_controller.dart';
 import 'package:e_voting_app/controllers/user_controller.dart';
 import 'package:e_voting_app/models/election_model.dart';
 import 'package:e_voting_app/screens/realtime_result.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -153,11 +154,24 @@ class _CastVoteState extends State<CastVote> {
                                                 .fromDocumentSnapshot(election))
                                         .toList();
                                     for (var element in userElections) {
+                                      //  if (element.voted!.contains(FirebaseAuth
+                                      //     .instance.currentUser!.uid)) {
+                                      //   return Get.back();
+                                      // }
+                                      if (element.voted!.contains(FirebaseAuth
+                                          .instance.currentUser!.uid)) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                                    "You have already voted")));
+                                        return Get.back();
+                                      }
                                       if (element.accessCode ==
                                           Get.arguments.accessCode) {
                                         setState(() {
                                           target = element;
                                         });
+
                                         firestore
                                             .collection("users")
                                             .doc(element.owner)
@@ -176,12 +190,18 @@ class _CastVoteState extends State<CastVote> {
                                               "count": element.options![index]
                                                   ['count']
                                             }
-                                          ])
+                                          ]),
+                                          "voted": FieldValue.arrayRemove(
+                                              element.voted!)
                                         });
 
                                         element.options![index]['count']++;
                                         var updatedOption =
                                             element.options![index];
+                                        List updatedVote = element.voted!;
+
+                                        updatedVote.add(FirebaseAuth
+                                            .instance.currentUser!.uid);
 
                                         firestore
                                             .collection("users")
@@ -197,7 +217,9 @@ class _CastVoteState extends State<CastVote> {
                                                   updatedOption['description'],
                                               "count": updatedOption['count']
                                             }
-                                          ])
+                                          ]),
+                                          "voted":
+                                              FieldValue.arrayUnion(updatedVote)
                                         }).then((value) {
                                           Get.to(const RealtimeResult(),
                                               arguments: target);

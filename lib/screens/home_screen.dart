@@ -9,6 +9,7 @@ import 'package:e_voting_app/screens/create_vote.dart';
 import 'package:e_voting_app/screens/user_elections.dart';
 import 'package:e_voting_app/widgets/action_box.dart';
 import 'package:e_voting_app/widgets/drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -137,6 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .fromDocumentSnapshot(election))
                                   .toList();
                               for (var element in userElections) {
+                                print(element);
+
                                 allElections.add(element);
                               }
                               for (var election in allElections) {

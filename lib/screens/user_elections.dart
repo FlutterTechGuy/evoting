@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -43,7 +44,7 @@ class UserElections extends StatelessWidget {
               slivers: [
                 SliverAppBar(
                   title: Text(
-                    "OWNED ELECTIONS",
+                    "Owned Elections",
                     style: GoogleFonts.roboto(
                         fontSize: 18.0,
                         color: Colors.white,
@@ -67,6 +68,7 @@ class UserElections extends StatelessWidget {
                     // ignore: missing_return
                     builder: (context, snap) {
                       if (snap.hasData) {
+                        final ds = snap.data!.data()!;
                         return GestureDetector(
                           onTap: () {
                             Get.to(const VoteDashboard(),
@@ -86,12 +88,18 @@ class UserElections extends StatelessWidget {
                                     trailing: const Icon(Icons.chevron_right),
                                     title: Text(ds['name'] ?? "Name"),
                                     subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           ds['description'] ?? '',
                                         ),
                                         Text(
-                                          ds['endDate'] ?? '',
+                                          DateFormat()
+                                              .add_MMMEd()
+                                              .format(
+                                                  DateTime.parse(ds['endDate']))
+                                              .toString(),
                                         )
                                       ],
                                     ),

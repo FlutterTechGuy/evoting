@@ -19,47 +19,10 @@ class CandidateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap,
-      child: Container(
-        height: height,
-        padding:
-            const EdgeInsets.only(top: 6.0, left: 8.0, right: 8.0, bottom: 8.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.green[200]!, Colors.blue[100]!])),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: CircleAvatar(
-                    radius: 40.0,
-                    backgroundImage: NetworkImage(candidateImgURL!)),
-              ),
-              Center(
-                child: Text(candidateName!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        color: Colors.green,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold)),
-              ),
-              Text(
-                candidateDesc!,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Image.asset('assets/icons/logo.png')
-            ],
-          ),
-        ),
-      ),
+    print(candidateImgURL);
+    return ListTile(
+      tileColor: Colors.green[200],
+      title: Text(candidateName!),
     );
   }
 }

@@ -36,10 +36,11 @@ class _AddVoteOptionWidgetState extends State<AddVoteOptionWidget> {
     setState(() {
       _uploadTask = reference.putFile(_imagePicked!);
       _uploadTask!.then((snapshot) {
-        setState(() {
+        setState(() async {
           snapshot.ref.getDownloadURL().then((imgURL) => imgURL = imgURL);
-          futureImgURL = Future.value(snapshot.ref.getDownloadURL());
+          futureImgURL = await snapshot.ref.getDownloadURL();
           Get.back(canPop: false);
+          print(futureImgURL);
         });
       });
     });
@@ -111,7 +112,9 @@ class _AddVoteOptionWidgetState extends State<AddVoteOptionWidget> {
                                 startUpload();
                               },
                               icon: const Icon(Icons.upload_file),
-                              label: const Text("Upload Image")),
+                              label: Text(_uploadTask != null
+                                  ? 'Loading..'
+                                  : "Upload Image")),
                     ],
                   ),
                 ),

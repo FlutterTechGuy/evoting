@@ -93,14 +93,17 @@ class _AddCandidateState extends State<AddCandidate> {
                           crossAxisSpacing: 10.0,
                           childAspectRatio: 1.0,
                         ),
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          return CandidateBox(
-                            candidateImgURL: data[index]['avatar'],
-                            candidateName: data[index]['name'],
-                            candidateDesc: data[index]['description'],
-                            onTap: () {},
-                          );
-                        }, childCount: data.length));
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return CandidateBox(
+                              candidateImgURL: data[index]['avatar'],
+                              candidateName: data[index]['name'],
+                              candidateDesc: data[index]['description'],
+                              onTap: () {},
+                            );
+                          },
+                          childCount: data.length,
+                        ));
               } else {
                 return const SliverToBoxAdapter(
                   child: Center(child: CircularProgressIndicator()),
